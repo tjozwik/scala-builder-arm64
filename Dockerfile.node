@@ -1,4 +1,6 @@
-FROM openlaw/scala-builder:alpine
+FROM tjozwik/scala-builder-arm64:latest
 
 # Install NodeJS 10.x [LTS branch] (needed for ScalaJS)
-RUN apk add --no-cache nodejs
+#RUN apk add --no-cache nodejs
+RUN curl -sL https://rpm.nodesource.com/setup_10.x | bash -
+RUN yum install -y nodejs
