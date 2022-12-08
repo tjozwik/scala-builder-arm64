@@ -15,7 +15,7 @@ ENV SBT_HOME=/usr/share/sbt
 
 # Install and keep a copy of bash.  Some scala/scalac scripts depend on bash(!),
 # and work unreliably with ash, et al.
-RUN apk add --no-cache bash
+RUN yum install -y bash tar gzip
 
 # Install SBT
 #
@@ -32,7 +32,7 @@ RUN apk add --no-cache bash
 #
 # But we don't want to depend on something outside of the stable alpine
 # tracking.
-RUN apk add --no-cache --virtual=build-deps curl && \
+RUN yum install -y curl && \
     # Install sbt base
     mkdir -p "${SBT_HOME}" && \
     set -o pipefail && \
@@ -43,9 +43,9 @@ RUN apk add --no-cache --virtual=build-deps curl && \
     sbt ++"${SCALA_VERSION}" sbtVersion && \
     # Get rid of Windows specific files
     rm "${SBT_HOME}"/bin/sbt.bat && \
-    rm "${SBT_HOME}"/conf/sbtconfig.txt && \
+    rm "${SBT_HOME}"/conf/sbtconfig.txt
     # Get rid of build-dependencies we only needed for this install step
-    apk del build-deps
+    #apk del build-deps
 
 # Verify SBT is installed successfully.
 #
