@@ -4,7 +4,7 @@
 # importantly, we need to stick with 8 for builds on docker due to this issue:
 #
 # https://github.com/sbt/sbt/issues/4168
-FROM adoptopenjdk/openjdk8:jdk8u262-b10-alpine
+FROM amazoncorretto:8u262
 
 # Build variables
 ARG SCALA_VERSION=2.12.12
